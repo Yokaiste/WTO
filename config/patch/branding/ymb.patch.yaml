@@ -1,0 +1,9 @@
+version: 1
+id: wto.ysm_branding
+name: WTO with YSM Branding
+description: Uses WTO menu identity text when YSM also generates the menu localisation file
+scope: prod
+scripts:
+  - path: brand-ysm.ts
+    tests:
+      - brand-ysm.test.ts
