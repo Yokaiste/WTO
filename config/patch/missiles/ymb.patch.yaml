@@ -20,6 +20,6 @@ targets:
           - field: MaxSpeedGRU
             multiply: ${tuning.missileFlightMultiplier}
             comment: '${modTag} - missile speed multiplied by ${tuning.missileFlightMultiplier}x'
-            minChanges: 50
+            minChanges: 5
           - field: MaxAccelerationGRU
             multiply: ${tuning.missileFlightMultiplier}
