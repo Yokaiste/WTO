@@ -1,0 +1,29 @@
+version: 1
+id: wto.buildings
+name: Forward-deployable FOBs
+description: Adds the deployment-shift module to every national FOB
+scope: prod
+targets:
+  - file: '${gfx}/BuildingDescriptors.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Descriptor_Unit_FOB_
+                - Descriptor_Unit_YSM_Supply_Base
+            - on: text
+              is: notContains
+              value:
+                - TDeploymentShiftModule
+        expect:
+          minBlocks: 10
+        leadingComment: '${modTag} - forward deployable'
+        edits:
+          - list: ModulesDescriptors
+            insert:
+              value: { $raw: 'TDeploymentShiftModuleDescriptor()' }
+              position: start
+            minChanges: 5

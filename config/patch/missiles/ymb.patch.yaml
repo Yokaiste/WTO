@@ -1,0 +1,25 @@
+version: 1
+id: wto.missiles
+name: Missile flight rebalance
+description: Faster ATGM and AGM flight profiles
+scope: prod
+targets:
+  - file: '${gfx}/MissileDescriptors.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Descriptor_Missile_ATGM
+                - Descriptor_Missile_AGM
+        expect:
+          minBlocks: 20
+        edits:
+          - field: MaxSpeedGRU
+            multiply: ${tuning.missileFlightMultiplier}
+            comment: '${modTag} - missile speed multiplied by ${tuning.missileFlightMultiplier}x'
+            minChanges: 5
+          - field: MaxAccelerationGRU
+            multiply: ${tuning.missileFlightMultiplier}
