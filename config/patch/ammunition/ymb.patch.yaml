@@ -48,6 +48,51 @@ targets:
       - op: bulk
         match:
           conditions:
+            - on: field
+              field: ProjectileType
+              is: contains
+              value: '1'
+            - on: field
+              field: TirIndirect
+              is: notContains
+              value: 'True'
+        expect:
+          minBlocks: 0
+        edits:
+          - field: MaximumRangeGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+            comment: '${modTag} - range multiplied by ${tuning.ammunitionRangeMultiplier}x'
+          - field: MaximumRangeHelicopterGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+          - field: MaximumRangeAirplaneGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_YZ_
+                - Ammo_YC_
+            - on: field
+              field: TirIndirect
+              is: notContains
+              value: 'True'
+        expect:
+          minBlocks: 0
+        edits:
+          - field: MaximumRangeGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+            comment: '${modTag} - range multiplied by ${tuning.ammunitionRangeMultiplier}x'
+          - field: MaximumRangeHelicopterGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+          - field: MaximumRangeAirplaneGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
             - on: name
               is: startsWith
               value:
