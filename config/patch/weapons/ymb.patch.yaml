@@ -1,0 +1,48 @@
+version: 1
+id: wto.weapons
+name: Vehicle smoke rebalance
+description: Caps vehicle smoke salvos, keeping trophy-system launchers separate
+scope: prod
+targets:
+  - file: '${gfx}/WeaponDescriptor.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: contains
+              value: Ammo_SMOKE_Vehicle_Grenadex8
+            - on: text
+              is: notContains
+              value: Ammo_APS
+        expect:
+          minBlocks: 10
+        leadingComment: '${modTag} - vehicle smoke set to ${tuning.vehicleSmokeSalvos}'
+        edits:
+          - list: Salves
+            setEntry:
+              index: -1
+              value: ${tuning.vehicleSmokeSalvos}
+            minChanges: 100
+
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: contains
+              value: Ammo_SMOKE_Vehicle_Grenadex8
+            - on: text
+              is: contains
+              value: Ammo_APS
+        expect:
+          minBlocks: 0
+        leadingComment: '${modTag} - vehicle smoke set to ${tuning.vehicleSmokeSalvos}, trophy system to ${tuning.trophySystemSalvos}'
+        edits:
+          - list: Salves
+            setEntry:
+              index: -2
+              value: ${tuning.vehicleSmokeSalvos}
+          - list: Salves
+            setEntry:
+              index: -1
+              value: ${tuning.trophySystemSalvos}
