@@ -186,7 +186,7 @@ exit /b 0
 :download_ymb
 echo.
 call :step "Finding the latest portable YMB release..."
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $headers=@{Accept='application/vnd.github+json'; 'User-Agent'='YMB-Auto-Deploy'}; $release=Invoke-RestMethod -UseBasicParsing -Headers $headers -Uri ('https://api.github.com/repos/' + $env:DEPLOY_REPO_OWNER + '/YMB/releases/latest'); $asset=$release.assets ^| Where-Object { $_.name -match '^YMB-v.+-windows-x64\.zip$' -and $_.name -notmatch '-no-bun\.zip$' } ^| Select-Object -First 1; if ($null -eq $asset) { throw 'The full Windows YMB archive is missing from the latest release.' }; [IO.File]::WriteAllText($env:YMB_URL_FILE, $asset.browser_download_url, [Text.UTF8Encoding]::new($false))"
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $headers=@{Accept='application/vnd.github+json'; 'User-Agent'='YMB-Auto-Deploy'}; $release=Invoke-RestMethod -UseBasicParsing -Headers $headers -Uri ('https://api.github.com/repos/' + $env:DEPLOY_REPO_OWNER + '/YMB/releases/latest'); $asset=$release.assets | Where-Object { $_.name -match '^YMB-v.+-windows-x64\.zip$' -and $_.name -notmatch '-no-bun\.zip$' } | Select-Object -First 1; if ($null -eq $asset) { throw 'The full Windows YMB archive is missing from the latest release.' }; [IO.File]::WriteAllText($env:YMB_URL_FILE, $asset.browser_download_url, [Text.UTF8Encoding]::new($false))"
 if errorlevel 1 (
   echo [ERROR] Could not find the full YMB archive at %YMB_REPOSITORY%/releases/latest
   exit /b 1
