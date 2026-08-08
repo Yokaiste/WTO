@@ -1,0 +1,299 @@
+version: 1
+id: wto.ammunition
+name: Ammunition rebalance
+description: Engagement ranges, projectile speed, artillery spread and per-weapon fixes
+scope: prod
+targets:
+  - file: '${gfx}/Ammunition.ndf'
+    operations:
+      - op: bulk
+        match:
+          mode: any
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_Canon
+                - Ammo_AutoCanon
+                - Ammo_Gatling
+                - Ammo_RocketAir
+                - Ammo_RocketInf
+                - Ammo_DCA
+                - Ammo_PM
+                - Ammo_FM
+                - Ammo_Sniper
+                - Ammo_SAW
+                - Ammo_MMG
+                - Ammo_HMG
+                - Ammo_hmg
+                - Ammo_Lance
+            - on: name
+              is: endsWith
+              value: Direct
+            - on: name
+              is: contains
+              value: _Direct_
+        expect:
+          minBlocks: 200
+        edits:
+          - field: MaximumRangeGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+            trailingComment: '${modTag} - range multiplied by ${tuning.ammunitionRangeMultiplier}x'
+            minChanges: 200
+          - field: MaximumRangeHelicopterGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+          - field: MaximumRangeAirplaneGRU
+            multiply: ${tuning.ammunitionRangeMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_Canon
+                - Ammo_AutoCanon
+                - Ammo_RocketInf
+                - Ammo_DCA
+                - Ammo_HMG
+                - Ammo_MMG
+                - Ammo_SAW
+                - Ammo_FM
+        expect:
+          minBlocks: 100
+        edits:
+          - field: ProjectileSpeedGRU
+            multiply: ${tuning.projectileSpeedMultiplier}
+            trailingComment: '${modTag} - projectile speed multiplied by ${tuning.projectileSpeedMultiplier}x'
+            minChanges: 100
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_Howz_Canon
+        expect:
+          minBlocks: 10
+        edits:
+          - field: DispersionAtMinRangeGRU
+            multiply: ${tuning.howitzerSpreadMultiplier}
+            trailingComment: '${modTag} - howitzer spread multiplied by ${tuning.howitzerSpreadMultiplier}x'
+            minChanges: 40
+          - field: DispersionAtMaxRangeGRU
+            multiply: ${tuning.howitzerSpreadMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_Howz_Canon
+                - Ammo_Mortier
+                - Ammo_RocketArt
+        expect:
+          minBlocks: 20
+        edits:
+          - field: SuppressDamages
+            multiply: ${tuning.suppressionMultiplier}
+            trailingComment: '${modTag} - suppression multiplied by ${tuning.suppressionMultiplier}x'
+            minChanges: 60
+          - field: RadiusSplashSuppressDamagesGRU
+            multiply: ${tuning.suppressionMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_DCA
+                - Ammo_Gatling_
+        expect:
+          minBlocks: 20
+        edits:
+          - field: AimingTime
+            multiply: ${tuning.aaLockTimeMultiplier}
+            trailingComment: '${modTag} - AA lock time multiplied by ${tuning.aaLockTimeMultiplier}x'
+            minChanges: 20
+          - field: TimeBetweenTwoSalvos
+            multiply: ${tuning.aaCycleTimeMultiplier}
+          - field: TimeBetweenTwoShots
+            multiply: ${tuning.aaCycleTimeMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_GatlingAir_GAU8_30mm
+                - Ammo_GatlingAir_AP_GAU8_30mm
+        expect:
+          minBlocks: 1
+        edits:
+          - field: ShotsCountPerSalvo
+            multiply: ${tuning.gau8BurstMultiplier}
+            trailingComment: '${modTag} - GAU-8 burst multiplied by ${tuning.gau8BurstMultiplier}x'
+            minChanges: 1
+          - field: ShotsBeforeMaxNoise
+            multiply: ${tuning.gau8BurstMultiplier}
+          - field: SupplyCost
+            multiply: ${tuning.gau8BurstMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_Lance_grenade
+        expect:
+          minBlocks: 1
+        edits:
+          - field: TimeBetweenTwoShots
+            set: ${tuning.grenadeLauncherShotDelay}
+            trailingComment: '${modTag} - grenade launcher rate of fire fixed'
+            minChanges: 1
+          - field: TimeBetweenTwoFx
+            set: ${tuning.grenadeLauncherShotDelay}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_Grenade_SMOKE
+                - Ammo_Grenade_Satchel_Charge
+        expect:
+          minBlocks: 2
+        edits:
+          - field: MaximumRangeGRU
+            set: ${tuning.throwingRangeGru}
+            trailingComment: '${modTag} - throwing range set to ${tuning.throwingRangeGru} GRU'
+            minChanges: 1
+          - field: TimeBetweenTwoShots
+            set: { $raw: '${tuning.throwingShotDelay}' }
+          - field: TimeBetweenTwoFx
+            set: { $raw: '${tuning.throwingShotDelay}' }
+          - field: TimeBetweenTwoSalvos
+            set: { $raw: '${tuning.throwingShotDelay}' }
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_flamethrower
+        expect:
+          minBlocks: 1
+        edits:
+          - field: MaximumRangeGRU
+            set: ${tuning.flamethrowerRangeGru}
+            trailingComment: '${modTag} - flamethrower range set to ${tuning.flamethrowerRangeGru} GRU'
+            minChanges: 1
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_Canon_FLAMME_ATO54
+        expect:
+          minBlocks: 1
+        edits:
+          - field: MaximumRangeGRU
+            set: ${tuning.to55RangeGru}
+            trailingComment: '${modTag} - TO-55 range set to ${tuning.to55RangeGru} GRU'
+            minChanges: 1
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_RocketArt_thermobaric_220mm
+            - on: name
+              is: notContains
+              value: _x24
+        expect:
+          minBlocks: 1
+        edits:
+          - field: MaximumRangeGRU
+            set: ${tuning.tos1RangeGru}
+            trailingComment: '${modTag} - TOS-1 range set to ${tuning.tos1RangeGru} GRU'
+            minChanges: 1
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_RocketArt_thermobaric_220mm_x24
+        expect:
+          minBlocks: 0
+        edits:
+          - field: MaximumRangeGRU
+            set: ${tuning.tos1WifRangeGru}
+            trailingComment: '${modTag} - TOS-1 (WiF) range set to ${tuning.tos1WifRangeGru} GRU'
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_AutoCanon_HE_30mm_24A2_BMP
+        expect:
+          minBlocks: 1
+        edits:
+          - field: TimeBetweenTwoShots
+            set: ${tuning.bmp2.heShotDelay}
+            trailingComment: '${modTag} - BMP-2 HE autocannon retuned'
+            minChanges: 1
+          - field: TimeBetweenTwoFx
+            set: ${tuning.bmp2.heShotDelay}
+          - field: ShotsCountPerSalvo
+            set: ${tuning.bmp2.salvoSize}
+          - field: AffichageMunitionParSalve
+            set: ${tuning.bmp2.salvoSize}
+          - field: SupplyCost
+            set: { $raw: '${tuning.bmp2.supplyCost}' }
+          - field: ShotsBeforeMaxNoise
+            set: ${tuning.bmp2.salvoSize}
+          - field: DispersionAtMaxRangeGRU
+            set: ${tuning.bmp2.dispersionAtMaxRangeGru}
+          - mapEntry: EBaseHitValueModifier/Idling
+            multiply: ${tuning.bmp2.accuracyMultiplier}
+          - mapEntry: EBaseHitValueModifier/Moving
+            multiply: ${tuning.bmp2.accuracyMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Ammo_AutoCanon_AP_30mm_24A2_BMP
+        expect:
+          minBlocks: 1
+        edits:
+          - field: TimeBetweenTwoShots
+            set: ${tuning.bmp2.apShotDelay}
+            trailingComment: '${modTag} - BMP-2 AP autocannon retuned'
+            minChanges: 1
+          - field: TimeBetweenTwoFx
+            set: ${tuning.bmp2.apShotDelay}
+          - field: ShotsCountPerSalvo
+            set: ${tuning.bmp2.salvoSize}
+          - field: AffichageMunitionParSalve
+            set: ${tuning.bmp2.salvoSize}
+          - field: SupplyCost
+            set: { $raw: '${tuning.bmp2.supplyCost}' }
+          - field: ShotsBeforeMaxNoise
+            set: ${tuning.bmp2.salvoSize}
+          - field: DispersionAtMaxRangeGRU
+            set: ${tuning.bmp2.dispersionAtMaxRangeGru}
+          - mapEntry: EBaseHitValueModifier/Idling
+            multiply: ${tuning.bmp2.accuracyMultiplier}
+          - mapEntry: EBaseHitValueModifier/Moving
+            multiply: ${tuning.bmp2.accuracyMultiplier}

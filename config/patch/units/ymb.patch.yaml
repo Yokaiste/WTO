@@ -1,0 +1,161 @@
+version: 1
+id: wto.units
+name: Unit rebalance
+description: Ground handling, fuel, supply, vision and SEAD behavior across every unit
+scope: prod
+targets:
+  - file: '${gfx}/UniteDescriptor.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: notContains
+              value:
+                - '"Air",'
+                - '"Infanterie",'
+                - '"Helo",'
+                - '"Artillerie",'
+        expect:
+          minBlocks: 100
+        leadingComment: '${modTag} - auto-orientation disabled'
+        edits:
+          - list: ModulesDescriptors
+            removeEntry: '~/FacingInfosModuleDescriptor'
+            minChanges: 300
+
+      - op: bulk
+        match:
+          conditions:
+            - on: type
+              is: startsWith
+              value: TEntityDescriptor
+        expect:
+          minBlocks: 1000
+        edits:
+          - field: FuelMoveDuration
+            multiply: ${tuning.fuelEnduranceMultiplier}
+            trailingComment: '${modTag} - fuel endurance multiplied by ${tuning.fuelEnduranceMultiplier}x'
+            minChanges: 500
+          - field: SpeedBonusFactorOnRoad
+            multiply: ${tuning.roadSpeedMultiplier}
+            trailingComment: '${modTag} - road speed bonus multiplied by ${tuning.roadSpeedMultiplier}x'
+            minChanges: 500
+
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: notContains
+              value:
+                - '"Air",'
+                - '"Infanterie",'
+                - '"Helo",'
+                - '"Crew",'
+                - '"Unite_transportable",'
+        expect:
+          minBlocks: 100
+        edits:
+          - field: StunDamageLevelsPack
+            set: ${tuning.vehicleStunDamageLevelsPack}
+            trailingComment: '${modTag} - no slowdown when stunned'
+            minChanges: 200
+
+      - op: bulk
+        match:
+          conditions:
+            - on: field
+              field: TagSet
+              is: notContains
+              value:
+                - '"Air"'
+                - '"Helo"'
+        expect:
+          minBlocks: 1000
+        edits:
+          - field: MaxSpeedInKmph
+            multiply: ${tuning.groundSpeedMultiplier}
+            trailingComment: '${modTag} - ground speed multiplied by ${tuning.groundSpeedMultiplier}x'
+            minChanges: 500
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: notContains
+              value: YS_Supply
+        expect:
+          minBlocks: 100
+        edits:
+          - field: SupplyCapacity
+            multiply: ${tuning.supplyCapacityMultiplier}
+            trailingComment: '${modTag} - supply capacity multiplied by ${tuning.supplyCapacityMultiplier}x'
+            minChanges: 30
+
+      - op: bulk
+        match:
+          conditions:
+            - on: field
+              field: TagSet
+              is: contains
+              value:
+                - '"Avion"'
+                - '"Helo"'
+        expect:
+          minBlocks: 100
+        edits:
+          - mapEntry: EVisionRange/Standard
+            multiply: ${tuning.airVisionMultiplier}
+            trailingComment: '${modTag} - air vision multiplied by ${tuning.airVisionMultiplier}x'
+            minChanges: 100
+          - mapEntry: EVisionRange/HighAltitude
+            multiply: ${tuning.airVisionMultiplier}
+          - mapEntry: EVisionRange/LowAltitude
+            multiply: ${tuning.airVisionMultiplier}
+          - mapEntry: EOpticalStrength/Standard
+            multiply: ${tuning.airVisionMultiplier}
+          - mapEntry: EOpticalStrength/HighAltitude
+            multiply: ${tuning.airVisionMultiplier}
+          - mapEntry: EOpticalStrength/LowAltitude
+            multiply: ${tuning.airVisionMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: field
+              field: TagSet
+              is: notContains
+              value:
+                - '"Avion"'
+                - '"Helo"'
+        expect:
+          minBlocks: 1000
+        edits:
+          - mapEntry: EVisionRange/Standard
+            multiply: ${tuning.groundVisionMultiplier}
+            trailingComment: '${modTag} - ground vision multiplied by ${tuning.groundVisionMultiplier}x'
+            minChanges: 500
+          - mapEntry: EVisionRange/HighAltitude
+            multiply: ${tuning.groundVisionMultiplier}
+          - mapEntry: EVisionRange/LowAltitude
+            multiply: ${tuning.groundVisionMultiplier}
+          - mapEntry: EOpticalStrength/Standard
+            multiply: ${tuning.groundVisionMultiplier}
+          - mapEntry: EOpticalStrength/HighAltitude
+            multiply: ${tuning.groundVisionMultiplier}
+          - mapEntry: EOpticalStrength/LowAltitude
+            multiply: ${tuning.groundVisionMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: contains
+              value: SEAD
+        expect:
+          minBlocks: 1
+        edits:
+          - mapEntry: EOpticalStrength/AntiRadar
+            set: ${tuning.seadDetectionGru}
+            trailingComment: '${modTag} - SEAD detection set to ${tuning.seadDetectionGru} GRU'
+            minChanges: 1

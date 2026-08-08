@@ -1,0 +1,36 @@
+version: 1
+id: wto.damage_levels
+name: Vehicle stun behavior
+description: Keeps the stunned state for vehicles without the infantry speed penalty
+scope: prod
+targets:
+  - file: '${gfx}/DamageLevels.ndf'
+    operations:
+      - op: add
+        position:
+          mode: after
+          anchor: DamageLevelsPackDescriptor_Unit_packStun
+        leadingComment: '${modTag} - vehicle stun without infantry slowdown'
+        value:
+          $raw: |
+            export DamageLevelsPackDescriptor_Unit_packStun_Vehicule is TDamageLevelsPackDescriptor
+            (
+                DescriptorId = GUID:{0de554be-57e2-48b5-93cc-ac56805031b6}
+                DamageLevelsDescriptors = [
+                    TDamageLevelDescriptor
+                    (
+                        DescriptorId = GUID:{b8210fe7-c048-4ffe-a28c-e6f9f87a1305}
+                        Value = 0
+                        EffectsPacks = [
+                        ]
+                    ),
+                    TDamageLevelDescriptor
+                    (
+                        DescriptorId = GUID:{c8c7c803-518d-4404-90b8-24dd42c30831}
+                        Value = ${tuning.vehicleStunThreshold}
+                        EffectsPacks = [
+                            $/GFX/EffectCapacity/UnitEffect_Unit_Stunned,
+                        ]
+                    ),
+                ]
+            )

@@ -1,0 +1,46 @@
+version: 1
+id: wto.ammunition_missiles
+name: Missile ammunition rebalance
+description: Doubled missile engagement ranges and slower AA missile engagement cycles
+scope: prod
+targets:
+  - file: '${gfx}/AmmunitionMissiles.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: type
+              is: startsWith
+              value: TAmmunitionDescriptor
+        expect:
+          minBlocks: 100
+        edits:
+          - field: MaximumRangeGRU
+            multiply: ${tuning.missileRangeMultiplier}
+            trailingComment: '${modTag} - missile range multiplied by ${tuning.missileRangeMultiplier}x'
+            minChanges: 30
+          - field: MaximumRangeAirplaneGRU
+            multiply: ${tuning.missileRangeMultiplier}
+          - field: MaximumRangeHelicopterGRU
+            multiply: ${tuning.missileRangeMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Ammo_SAM
+                - Ammo_MANPAD
+                - Ammo_Mistral
+        expect:
+          minBlocks: 20
+        edits:
+          - field: AimingTime
+            multiply: ${tuning.aaLockTimeMultiplier}
+            trailingComment: '${modTag} - AA missile lock time multiplied by ${tuning.aaLockTimeMultiplier}x'
+            minChanges: 10
+          - field: TimeBetweenTwoShots
+            multiply: ${tuning.aaCycleTimeMultiplier}
+          - field: TimeBetweenTwoSalvos
+            multiply: ${tuning.aaCycleTimeMultiplier}

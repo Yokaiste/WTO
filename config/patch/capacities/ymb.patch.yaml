@@ -1,0 +1,37 @@
+version: 1
+id: wto.capacities
+name: Capacity radius rebalance
+description: Wider jammer, electronic warfare and military police effect radii
+scope: prod
+targets:
+  - file: '${gfx}/CapaciteList.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Capacite_jammer
+                - Capacite_electronic_warfare
+        expect:
+          minBlocks: 1
+        edits:
+          - field: RangeGRU
+            multiply: ${tuning.effectRadiusMultiplier}
+            trailingComment: '${modTag} - effect radius multiplied by ${tuning.effectRadiusMultiplier}x'
+            minChanges: 1
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Capacite_MilitaryPolice
+        expect:
+          minBlocks: 1
+        edits:
+          - field: RangeGRU
+            multiply: ${tuning.militaryPoliceRadiusMultiplier}
+            trailingComment: '${modTag} - effect radius multiplied by ${tuning.militaryPoliceRadiusMultiplier}x'
+            minChanges: 1
