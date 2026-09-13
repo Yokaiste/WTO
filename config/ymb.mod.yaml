@@ -1,0 +1,34 @@
+version: 1
+id: 'wto'
+name: 'WTO'
+description: 'WARNO Tactical Overhaul — ranges, speeds, vision and weapon
+  behavior rebalanced across the whole game'
+enabled: true
+priority: 20
+allowWriteToModifiedFiles: true
+variables:
+  modTag: 'WTO'
+  tuning:
+    missileFlightMultiplier: 1.5
+    ammunitionRangeMultiplier: 2
+    missileRangeMultiplier: 2
+    projectileSpeedMultiplier: 1.5
+    howitzerSpreadMultiplier: 2
+    suppressionMultiplier: 1.2
+    aaLockTimeMultiplier: 3
+    aaCycleTimeMultiplier: 2
+    gau8BurstMultiplier: 5
+    grenadeLauncherShotDelay: 0.3
+    throwingRangeGru: 800
+    throwingShotDelay: '2.0'
+    flamethrowerRangeGru: 475
+    to55RangeGru: 1025
+    tos1RangeGru: 7000
+    tos1WifRangeGru: 12000
+    bmp2:
+      heShotDelay: 0.1
+      apShotDelay: 0.2
+      salvoSize: 8
+      supplyCost: '8.0'
+      dispersionAtMaxRangeGru: 148
+      accuracyMultiplier: 0.66
