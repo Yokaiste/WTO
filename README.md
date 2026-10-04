@@ -18,7 +18,7 @@ WTO reshapes engagement ranges, movement, vision, and weapon behavior across WAR
 - **Movement and reconnaissance.** Revised road speeds and sight ranges reshape routes and positioning.
 - **Weapon timing and handling.** Adjusted projectile speeds, missile flight, engagement cycles, artillery behavior, and selected weapon rules.
 - **Customizable balance.** Tune the parts you want while keeping the remaining defaults.
-- **YSM integration.** Apply WTO after YSM to bring its balance pass to the expanded sandbox, or build WTO alone against compatible WARNO mod data.
+- **[YSM](https://github.com/Yokaiste/YSM) integration.** Apply WTO after YSM to bring its balance pass to the expanded sandbox, or build WTO alone against compatible WARNO mod data.
 - **WTO × ANY MOD.** Bring the tactical overhaul to a mod you love with **[YWT](https://github.com/dary1337/yuri-warno-toolkit)**. Compatibility varies by mod.
 
 ## Work with the source
@@ -37,5 +37,5 @@ Keep `YMB/.ymb-state` for recovery. See YMB’s [configuration guide](../../docs
 ## License
 
 This source repository is available under the [MIT License](LICENSE).
-WTO’s MIT license does not cover YSM or its code, which remain subject to [YSM’s own license](../YSM/LICENSE).
+WTO’s MIT license does not cover YSM or its code, which remain subject to [YSM’s own license](https://github.com/Yokaiste/YSM/blob/master/LICENSE).
 WARNO and its original game assets remain the property of Eugen Systems and are not relicensed by this repository.
