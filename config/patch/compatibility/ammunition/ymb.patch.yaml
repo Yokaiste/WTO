@@ -1,0 +1,13 @@
+version: 1
+id: wto.compatibility.ammunition
+name: Custom ammunition rebalance
+description: Applies WTO rules to renamed and inline ammunition using its weapon category
+scope: prod
+dependsOn:
+  - wto.ammunition
+  - wto.ammunition_missiles
+  - wto.missiles
+scripts:
+  - path: ammunition.ts
+    tests:
+      - ammunition.test.ts

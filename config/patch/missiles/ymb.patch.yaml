@@ -1,0 +1,7 @@
+version: 1
+id: wto.missiles
+name: Missile flight rebalance
+description: Faster ATGM and AGM flight profiles
+scope: prod
+scripts:
+  - path: apply.ts

@@ -1,0 +1,7 @@
+version: 1
+id: wto.ammunition
+name: Ammunition rebalance
+description: Engagement ranges, projectile speed, artillery spread and per-weapon fixes
+scope: prod
+scripts:
+  - path: apply.ts
