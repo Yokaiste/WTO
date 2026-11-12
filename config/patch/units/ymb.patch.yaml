@@ -1,0 +1,182 @@
+version: 1
+id: wto.units
+name: Unit rebalance
+description: Ground handling, fuel, supply, vision and SEAD behavior across every unit
+scope: prod
+targets:
+  - file: 'GameData/Generated/Gameplay/TacticalUnits.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: notContains
+              value:
+                - '"Air",'
+                - '"Infanterie",'
+                - '"Helo",'
+                - '"Artillerie",'
+        expect:
+          minBlocks: 100
+        leadingComment: '${modTag} - auto-orientation disabled'
+        edits:
+          - list: ModulesDescriptors
+            removeEntry: '~/FacingInfosModuleDescriptor'
+            minChanges: 300
+
+      - op: bulk
+        match:
+          conditions:
+            - on: type
+              is: startsWith
+              value: TEntityDescriptor
+        expect:
+          minBlocks: 1000
+        edits:
+          - field: FuelMoveDuration
+            multiply: ${10 * tuning.fuelEnduranceMultiplier}
+            trailingComment: '${modTag} - fuel endurance multiplied by
+              ${10 * tuning.fuelEnduranceMultiplier}x'
+            minChanges: 500
+          - field: SpeedBonusFactorOnRoad
+            multiply: ${1.2 * tuning.roadSpeedMultiplier}
+            trailingComment: '${modTag} - road speed bonus multiplied by
+              ${1.2 * tuning.roadSpeedMultiplier}x'
+            minChanges: 500
+
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: notContains
+              value:
+                - '"Air",'
+                - '"Infanterie",'
+                - '"Helo",'
+                - '"Crew",'
+                - '"Unite_transportable",'
+        expect:
+          minBlocks: 100
+        edits:
+          - field: StunDamageLevelsPack
+            set: ~/DamageLevelsPackDescriptor_Unit_packStun_Vehicule
+            trailingComment: '${modTag} - no slowdown when stunned'
+            minChanges: 200
+
+      - op: bulk
+        match:
+          conditions:
+            - on: field
+              field: TagSet
+              is: notContains
+              value:
+                - '"Air"'
+                - '"Helo"'
+        expect:
+          minBlocks: 1000
+        edits:
+          - field: MaxSpeedInKmph
+            multiply: ${0.7 * multipliers.speed * tuning.groundSpeedMultiplier}
+            trailingComment: '${modTag} - ground speed multiplied by
+              ${0.7 * multipliers.speed * tuning.groundSpeedMultiplier}x'
+            minChanges: 500
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: notContains
+              value: YS_Supply
+        expect:
+          minBlocks: 100
+        edits:
+          - field: SupplyCapacity
+            multiply: ${3 * multipliers.supply * tuning.supplyCapacityMultiplier}
+            trailingComment: '${modTag} - supply capacity multiplied by
+              ${3 * multipliers.supply * tuning.supplyCapacityMultiplier}x'
+            minChanges: 30
+
+      - op: bulk
+        match:
+          conditions:
+            - on: field
+              field: TagSet
+              is: contains
+              value:
+                - '"Avion"'
+                - '"Helo"'
+            # Cheat vision is a fixed extreme value, not normal reconnaissance balance.
+            - on: name
+              is: notContains
+              value: '_YC_'
+        expect:
+          minBlocks: 100
+        edits:
+          - mapEntry: EVisionRange/Standard
+            multiply: ${2 * multipliers.vision * tuning.airVisionMultiplier}
+            trailingComment: '${modTag} - air vision multiplied by
+              ${2 * multipliers.vision * tuning.airVisionMultiplier}x'
+            minChanges: 100
+          - mapEntry: EVisionRange/HighAltitude
+            multiply: ${2 * multipliers.vision * tuning.airVisionMultiplier}
+          - mapEntry: EVisionRange/LowAltitude
+            multiply: ${2 * multipliers.vision * tuning.airVisionMultiplier}
+          - mapEntry: EOpticalStrength/Standard
+            multiply: ${2 * multipliers.vision * tuning.airVisionMultiplier}
+          - mapEntry: EOpticalStrength/HighAltitude
+            multiply: ${2 * multipliers.vision * tuning.airVisionMultiplier}
+          - mapEntry: EOpticalStrength/LowAltitude
+            multiply: ${2 * multipliers.vision * tuning.airVisionMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: field
+              field: TagSet
+              is: notContains
+              value:
+                - '"Avion"'
+                - '"Helo"'
+            - on: name
+              is: notContains
+              value: '_YC_'
+        expect:
+          minBlocks: 1000
+        edits:
+          - mapEntry: EVisionRange/Standard
+            multiply: ${1.2 * multipliers.vision * tuning.groundVisionMultiplier}
+            trailingComment: '${modTag} - ground vision multiplied by
+              ${1.2 * multipliers.vision * tuning.groundVisionMultiplier}x'
+            minChanges: 500
+          - mapEntry: EVisionRange/HighAltitude
+            multiply: ${1.2 * multipliers.vision * tuning.groundVisionMultiplier}
+          - mapEntry: EVisionRange/LowAltitude
+            multiply: ${1.2 * multipliers.vision * tuning.groundVisionMultiplier}
+          - mapEntry: EOpticalStrength/Standard
+            multiply: ${1.2 * multipliers.vision * tuning.groundVisionMultiplier}
+          - mapEntry: EOpticalStrength/HighAltitude
+            multiply: ${1.2 * multipliers.vision * tuning.groundVisionMultiplier}
+          - mapEntry: EOpticalStrength/LowAltitude
+            multiply: ${1.2 * multipliers.vision * tuning.groundVisionMultiplier}
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: contains
+              value: SEAD
+        expect:
+          minBlocks: 1
+        edits:
+          - mapEntry: EOpticalStrength/AntiRadar
+            set: 1000000
+            trailingComment: '${modTag} - SEAD detection set to 1000000 GRU'
+            minChanges: 1
+variables:
+  tuning:
+    fuelEnduranceMultiplier: 1.0
+    roadSpeedMultiplier: 1.0
+    groundSpeedMultiplier: 1.0
+    supplyCapacityMultiplier: 1.0
+    airVisionMultiplier: 1.0
+    groundVisionMultiplier: 1.0

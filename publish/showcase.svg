@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+<title id="title">WARNO Tactical Overhaul</title><desc id="desc">A tactical map with range rings and approach routes: rethink range, movement, and tempo.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#152824"/><stop offset="1" stop-color="#0a1518"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#3b5a50" stroke-width=".6"/></pattern></defs>
+<rect width="1200" height="440" rx="24" fill="url(#bg)"/><rect x="735" width="465" height="440" rx="24" fill="url(#grid)"/>
+<g fill="none" stroke="#517965"><circle cx="991" cy="225" r="158"/><circle cx="991" cy="225" r="107"/><circle cx="991" cy="225" r="55"/></g><path d="M790 374 882 332 914 260 991 225 1080 103 1150 70" fill="none" stroke="#c4d79e" stroke-width="3" stroke-dasharray="10 8"/>
+<g fill="#e7ab62"><circle cx="991" cy="225" r="8"/><path d="m864 319 17-29 17 29z"/><path d="m1064 114 17-29 17 29z"/></g>
+<g font-family="Segoe UI, Arial, sans-serif"><text x="58" y="69" font-size="17" font-weight="700" letter-spacing="4" fill="#c4d79e">WARNO TACTICAL OVERHAUL</text><text x="52" y="211" font-size="130" font-weight="750" letter-spacing="-5" fill="#f5f6eb">WTO</text>
+<text x="59" y="280" font-size="32" font-weight="600" fill="#f5f6eb">Make every approach matter.</text><text x="60" y="347" font-size="18" letter-spacing="3" fill="#c4d79e">RANGE / MOVEMENT / TEMPO</text></g></svg>

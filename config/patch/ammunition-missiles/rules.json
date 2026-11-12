@@ -1,0 +1,64 @@
+{
+  "range": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "type",
+          "is": "startsWith",
+          "value": "TAmmunitionDescriptor"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 100
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "multiply": "${2 * multipliers.range * tuning.missileRangeMultiplier}",
+        "trailingComment": "${modTag} - missile range multiplied by ${2 * multipliers.range * tuning.missileRangeMultiplier}x",
+        "minChanges": 30
+      },
+      {
+        "field": "MaximumRangeAirplaneGRU",
+        "multiply": "${2 * multipliers.range * tuning.missileRangeMultiplier}"
+      },
+      {
+        "field": "MaximumRangeHelicopterGRU",
+        "multiply": "${2 * multipliers.range * tuning.missileRangeMultiplier}"
+      }
+    ]
+  },
+  "aaCycle": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": ["Ammo_SAM", "Ammo_MANPAD", "Ammo_Mistral"]
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 20
+    },
+    "edits": [
+      {
+        "field": "AimingTime",
+        "multiply": "${3 * multipliers.timing * tuning.aaLockTimeMultiplier}",
+        "trailingComment": "${modTag} - AA missile lock time multiplied by ${3 * multipliers.timing * tuning.aaLockTimeMultiplier}x",
+        "minChanges": 10
+      },
+      {
+        "field": "TimeBetweenTwoShots",
+        "multiply": "${2 * multipliers.timing * tuning.aaCycleTimeMultiplier}"
+      },
+      {
+        "field": "TimeBetweenTwoSalvos",
+        "multiply": "${2 * multipliers.timing * tuning.aaCycleTimeMultiplier}"
+      }
+    ]
+  }
+}
