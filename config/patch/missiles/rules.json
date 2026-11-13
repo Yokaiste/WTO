@@ -1,0 +1,29 @@
+{
+  "flight": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": ["Descriptor_Missile_ATGM", "Descriptor_Missile_AGM"]
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 20
+    },
+    "edits": [
+      {
+        "field": "MaxSpeedGRU",
+        "multiply": "${1.5 * multipliers.speed * tuning.missileFlightMultiplier}",
+        "trailingComment": "${modTag} - missile speed multiplied by ${1.5 * multipliers.speed * tuning.missileFlightMultiplier}x",
+        "minChanges": 5
+      },
+      {
+        "field": "MaxAccelerationGRU",
+        "multiply": "${1.5 * multipliers.speed * tuning.missileFlightMultiplier}"
+      }
+    ]
+  }
+}

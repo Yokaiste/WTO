@@ -1,0 +1,43 @@
+version: 1
+id: wto.capacities
+name: Capacity radius rebalance
+description: 'Extend jammer, electronic warfare, and military police effect ranges.'
+scope: prod
+targets:
+  - file: 'GameData/Generated/Gameplay/Gfx/CapaciteList.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value:
+                - Capacite_jammer
+                - Capacite_electronic_warfare
+        expect:
+          minBlocks: 1
+        edits:
+          - field: RangeGRU
+            multiply: ${2 * multipliers.range * tuning.effectRadiusMultiplier}
+            trailingComment: '${modTag} - effect radius multiplied by
+              ${2 * multipliers.range * tuning.effectRadiusMultiplier}x'
+            minChanges: 1
+
+      - op: bulk
+        match:
+          conditions:
+            - on: name
+              is: startsWith
+              value: Capacite_MilitaryPolice
+        expect:
+          minBlocks: 1
+        edits:
+          - field: RangeGRU
+            multiply: ${3 * multipliers.range * tuning.militaryPoliceRadiusMultiplier}
+            trailingComment: '${modTag} - effect radius multiplied by
+              ${3 * multipliers.range * tuning.militaryPoliceRadiusMultiplier}x'
+            minChanges: 1
+variables:
+  tuning:
+    effectRadiusMultiplier: 1.0
+    militaryPoliceRadiusMultiplier: 1.0

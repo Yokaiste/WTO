@@ -1,0 +1,485 @@
+{
+  "range": {
+    "op": "bulk",
+    "match": {
+      "mode": "any",
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": [
+            "Ammo_Canon",
+            "Ammo_AutoCanon",
+            "Ammo_Gatling",
+            "Ammo_RocketAir",
+            "Ammo_RocketInf",
+            "Ammo_DCA",
+            "Ammo_PM",
+            "Ammo_FM",
+            "Ammo_Sniper",
+            "Ammo_SAW",
+            "Ammo_MMG",
+            "Ammo_HMG",
+            "Ammo_hmg",
+            "Ammo_Lance"
+          ]
+        },
+        {
+          "on": "name",
+          "is": "endsWith",
+          "value": "Direct"
+        },
+        {
+          "on": "name",
+          "is": "contains",
+          "value": "_Direct_"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 200
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "multiply": "${2 * multipliers.range * tuning.ammunitionRangeMultiplier}",
+        "trailingComment": "${modTag} - range multiplied by ${2 * multipliers.range * tuning.ammunitionRangeMultiplier}x",
+        "minChanges": 200
+      },
+      {
+        "field": "MaximumRangeHelicopterGRU",
+        "multiply": "${2 * multipliers.range * tuning.ammunitionRangeMultiplier}"
+      },
+      {
+        "field": "MaximumRangeAirplaneGRU",
+        "multiply": "${2 * multipliers.range * tuning.ammunitionRangeMultiplier}"
+      }
+    ]
+  },
+  "projectileSpeed": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": [
+            "Ammo_Canon",
+            "Ammo_AutoCanon",
+            "Ammo_RocketInf",
+            "Ammo_DCA",
+            "Ammo_HMG",
+            "Ammo_MMG",
+            "Ammo_SAW",
+            "Ammo_FM"
+          ]
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 100
+    },
+    "edits": [
+      {
+        "field": "ProjectileSpeedGRU",
+        "multiply": "${1.5 * multipliers.speed * tuning.projectileSpeedMultiplier}",
+        "trailingComment": "${modTag} - projectile speed multiplied by ${1.5 * multipliers.speed * tuning.projectileSpeedMultiplier}x",
+        "minChanges": 100
+      }
+    ]
+  },
+  "spread": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_Howz_Canon"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 10
+    },
+    "edits": [
+      {
+        "field": "DispersionAtMinRangeGRU",
+        "multiply": "${2 * multipliers.dispersion * tuning.howitzerSpreadMultiplier}",
+        "trailingComment": "${modTag} - howitzer spread multiplied by ${2 * multipliers.dispersion * tuning.howitzerSpreadMultiplier}x",
+        "minChanges": 40
+      },
+      {
+        "field": "DispersionAtMaxRangeGRU",
+        "multiply": "${2 * multipliers.dispersion * tuning.howitzerSpreadMultiplier}"
+      }
+    ]
+  },
+  "suppression": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": ["Ammo_Howz_Canon", "Ammo_Mortier", "Ammo_RocketArt"]
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 20
+    },
+    "edits": [
+      {
+        "field": "SuppressDamages",
+        "multiply": "${1.2 * multipliers.suppression * tuning.suppressionMultiplier}",
+        "trailingComment": "${modTag} - suppression multiplied by ${1.2 * multipliers.suppression * tuning.suppressionMultiplier}x",
+        "minChanges": 60
+      },
+      {
+        "field": "RadiusSplashSuppressDamagesGRU",
+        "multiply": "${1.2 * multipliers.suppression * tuning.suppressionMultiplier}"
+      }
+    ]
+  },
+  "aaCycle": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": ["Ammo_DCA", "Ammo_Gatling_"]
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 20
+    },
+    "edits": [
+      {
+        "field": "AimingTime",
+        "multiply": "${3 * multipliers.timing * tuning.aaLockTimeMultiplier}",
+        "trailingComment": "${modTag} - AA lock time multiplied by ${3 * multipliers.timing * tuning.aaLockTimeMultiplier}x",
+        "minChanges": 20
+      },
+      {
+        "field": "TimeBetweenTwoSalvos",
+        "multiply": "${2 * multipliers.timing * tuning.aaCycleTimeMultiplier}"
+      },
+      {
+        "field": "TimeBetweenTwoShots",
+        "multiply": "${2 * multipliers.timing * tuning.aaCycleTimeMultiplier}"
+      }
+    ]
+  },
+  "gau8Burst": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": ["Ammo_GatlingAir_GAU8_30mm", "Ammo_GatlingAir_AP_GAU8_30mm"]
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 1
+    },
+    "edits": [
+      {
+        "field": "ShotsCountPerSalvo",
+        "multiply": "${5 * multipliers.ammunition * tuning.gau8BurstMultiplier}",
+        "trailingComment": "${modTag} - GAU-8 burst multiplied by ${5 * multipliers.ammunition * tuning.gau8BurstMultiplier}x",
+        "minChanges": 1
+      },
+      {
+        "field": "ShotsBeforeMaxNoise",
+        "multiply": "${5 * multipliers.ammunition * tuning.gau8BurstMultiplier}"
+      },
+      {
+        "field": "SupplyCost",
+        "multiply": "${5 * multipliers.ammunition * tuning.gau8BurstMultiplier * multipliers.supply}"
+      }
+    ]
+  },
+  "grenadeLauncher": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_Lance_grenade"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 1
+    },
+    "edits": [
+      {
+        "field": "TimeBetweenTwoShots",
+        "set": "${0.3 * multipliers.timing}",
+        "trailingComment": "${modTag} - grenade launcher rate of fire fixed",
+        "minChanges": 1
+      },
+      {
+        "field": "TimeBetweenTwoFx",
+        "set": "${0.3 * multipliers.timing}"
+      }
+    ]
+  },
+  "throwing": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": ["Ammo_Grenade_SMOKE", "Ammo_Grenade_Satchel_Charge"]
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 2
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "set": "${round(800 * multipliers.range)}",
+        "trailingComment": "${modTag} - throwing range set to ${round(800 * multipliers.range)} GRU",
+        "minChanges": 1
+      },
+      {
+        "field": "TimeBetweenTwoShots",
+        "set": {
+          "$raw": "${2 * multipliers.timing}"
+        }
+      },
+      {
+        "field": "TimeBetweenTwoFx",
+        "set": {
+          "$raw": "${2 * multipliers.timing}"
+        }
+      },
+      {
+        "field": "TimeBetweenTwoSalvos",
+        "set": {
+          "$raw": "${2 * multipliers.timing}"
+        }
+      }
+    ]
+  },
+  "flamethrower": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_flamethrower"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 1
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "set": "${round(475 * multipliers.range)}",
+        "trailingComment": "${modTag} - flamethrower range set to ${round(475 * multipliers.range)} GRU",
+        "minChanges": 1
+      }
+    ]
+  },
+  "to55": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_Canon_FLAMME_ATO54"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 1
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "set": "${round(1025 * multipliers.range)}",
+        "trailingComment": "${modTag} - TO-55 range set to ${round(1025 * multipliers.range)} GRU",
+        "minChanges": 1
+      }
+    ]
+  },
+  "tos1": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_RocketArt_thermobaric_220mm"
+        },
+        {
+          "on": "name",
+          "is": "notContains",
+          "value": "_x24"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 1
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "set": "${round(7000 * multipliers.range)}",
+        "trailingComment": "${modTag} - TOS-1 range set to ${round(7000 * multipliers.range)} GRU",
+        "minChanges": 1
+      }
+    ]
+  },
+  "tos1Wif": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_RocketArt_thermobaric_220mm_x24"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 0
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "set": "${round(12000 * multipliers.range)}",
+        "trailingComment": "${modTag} - TOS-1 (WiF) range set to ${round(12000 * multipliers.range)} GRU"
+      }
+    ]
+  },
+  "bmp2He": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_AutoCanon_HE_30mm_24A2_BMP"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 1
+    },
+    "edits": [
+      {
+        "field": "TimeBetweenTwoShots",
+        "set": "${0.1 * multipliers.timing}",
+        "trailingComment": "${modTag} - BMP-2 HE autocannon retuned",
+        "minChanges": 1
+      },
+      {
+        "field": "TimeBetweenTwoFx",
+        "set": "${0.1 * multipliers.timing}"
+      },
+      {
+        "field": "ShotsCountPerSalvo",
+        "set": "${tuning.bmp2.salvoSize}"
+      },
+      {
+        "field": "AffichageMunitionParSalve",
+        "set": "${tuning.bmp2.salvoSize}"
+      },
+      {
+        "field": "SupplyCost",
+        "set": {
+          "$raw": "${decimal(8 * multipliers.supply * multipliers.ammunition * tuning.bmp2.salvoMultiplier)}"
+        }
+      },
+      {
+        "field": "ShotsBeforeMaxNoise",
+        "set": "${tuning.bmp2.salvoSize}"
+      },
+      {
+        "field": "DispersionAtMaxRangeGRU",
+        "set": "${round(148 * multipliers.dispersion)}"
+      },
+      {
+        "mapEntry": "EBaseHitValueModifier/Idling",
+        "multiply": "${0.66 * tuning.bmp2.accuracyMultiplier}"
+      },
+      {
+        "mapEntry": "EBaseHitValueModifier/Moving",
+        "multiply": "${0.66 * tuning.bmp2.accuracyMultiplier}"
+      }
+    ]
+  },
+  "bmp2Ap": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_AutoCanon_AP_30mm_24A2_BMP"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 1
+    },
+    "edits": [
+      {
+        "field": "TimeBetweenTwoShots",
+        "set": "${0.2 * multipliers.timing}",
+        "trailingComment": "${modTag} - BMP-2 AP autocannon retuned",
+        "minChanges": 1
+      },
+      {
+        "field": "TimeBetweenTwoFx",
+        "set": "${0.2 * multipliers.timing}"
+      },
+      {
+        "field": "ShotsCountPerSalvo",
+        "set": "${tuning.bmp2.salvoSize}"
+      },
+      {
+        "field": "AffichageMunitionParSalve",
+        "set": "${tuning.bmp2.salvoSize}"
+      },
+      {
+        "field": "SupplyCost",
+        "set": {
+          "$raw": "${decimal(8 * multipliers.supply * multipliers.ammunition * tuning.bmp2.salvoMultiplier)}"
+        }
+      },
+      {
+        "field": "ShotsBeforeMaxNoise",
+        "set": "${tuning.bmp2.salvoSize}"
+      },
+      {
+        "field": "DispersionAtMaxRangeGRU",
+        "set": "${round(148 * multipliers.dispersion)}"
+      },
+      {
+        "mapEntry": "EBaseHitValueModifier/Idling",
+        "multiply": "${0.66 * tuning.bmp2.accuracyMultiplier}"
+      },
+      {
+        "mapEntry": "EBaseHitValueModifier/Moving",
+        "multiply": "${0.66 * tuning.bmp2.accuracyMultiplier}"
+      }
+    ]
+  }
+}

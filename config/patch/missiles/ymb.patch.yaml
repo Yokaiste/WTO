@@ -1,0 +1,7 @@
+version: 1
+id: wto.missiles
+name: Missile flight rebalance
+description: 'Speed up anti-tank and air-to-ground missile flight.'
+scope: prod
+scripts:
+  - path: apply.ts

@@ -1,0 +1,14 @@
+version: 1
+id: wto.ysm_branding
+name: WTO with YSM Branding
+description: 'Label the YSM main menu as WTO when playing the combined build.'
+scope: prod
+scripts:
+  - path: brand-ysm.ts
+    tests:
+      - brand-ysm.test.ts
+variables:
+  branding:
+    YSM: WARNO Tactical Overhaul
+    YSMTIT: WARNO Tactical Overhaul
+    YSMMT: YSM sandbox battles with WTO tactical balance

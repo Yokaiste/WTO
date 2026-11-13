@@ -1,0 +1,54 @@
+version: 1
+id: wto.weapons
+name: Vehicle smoke rebalance
+description: 'Limit vehicle smoke salvos without changing active-protection launchers.'
+scope: prod
+targets:
+  - file: 'GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf'
+    operations:
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: contains
+              value: Ammo_SMOKE_Vehicle_Grenadex8
+            - on: text
+              is: notContains
+              value: Ammo_APS
+        expect:
+          minBlocks: 10
+        leadingComment: '${modTag} - vehicle smoke set to ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)}'
+        edits:
+          - list: Salves
+            setEntry:
+              index: -1
+              value: ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)}
+            minChanges: 100
+
+      - op: bulk
+        match:
+          conditions:
+            - on: text
+              is: contains
+              value: Ammo_SMOKE_Vehicle_Grenadex8
+            - on: text
+              is: contains
+              value: Ammo_APS
+        expect:
+          minBlocks: 0
+        leadingComment:
+          '${modTag} - vehicle smoke set to ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)},
+          trophy system to ${round(multipliers.ammunition * tuning.trophySystemSalvosMultiplier)}'
+        edits:
+          - list: Salves
+            setEntry:
+              index: -2
+              value: ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)}
+          - list: Salves
+            setEntry:
+              index: -1
+              value: ${round(multipliers.ammunition * tuning.trophySystemSalvosMultiplier)}
+variables:
+  tuning:
+    vehicleSmokeSalvosMultiplier: 1.0
+    trophySystemSalvosMultiplier: 1.0

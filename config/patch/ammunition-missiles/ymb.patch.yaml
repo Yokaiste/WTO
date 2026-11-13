@@ -1,0 +1,7 @@
+version: 1
+id: wto.ammunition_missiles
+name: Missile ammunition rebalance
+description: 'Extend missile engagement ranges and slow anti-aircraft firing cycles.'
+scope: prod
+scripts:
+  - path: apply.ts

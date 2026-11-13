@@ -1,0 +1,7 @@
+version: 1
+id: wto.ammunition
+name: Ammunition rebalance
+description: 'Rework weapon ranges, projectile speeds, and artillery spread.'
+scope: prod
+scripts:
+  - path: apply.ts
