@@ -1,0 +1,30 @@
+version: 2
+id: wto.weapons
+name: Vehicle smoke rebalance
+description: 'Limit vehicle smoke salvos without changing active-protection launchers.'
+scope: prod
+targets:
+  - file: 'GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf'
+    operations:
+      # compatibility: absent vanilla roles may be allowed explicitly for overhauls.
+      - op: bulk
+        allowNoChange: "compatibility: this role may be absent or already configured."
+        match:
+          conditions:
+            - on: text
+              is: contains
+              value: Ammo_SMOKE_Vehicle_Grenadex8
+            # compatibility: leave active-protection magazines to their own patch.
+            - on: text
+              is: notContains
+              value: Ammo_APS
+        expect:
+          minBlocks: '${compatibility.allowMissingVanillaTargets ? 0 : 10}'
+        leadingComment: '${modTag} - vehicle smoke set to ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)}'
+        edits:
+          - list: Salves
+            setEntry:
+              index: -1
+              value: ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)}
+            minChanges: '${compatibility.allowMissingVanillaTargets ? 0 : 100}'
+

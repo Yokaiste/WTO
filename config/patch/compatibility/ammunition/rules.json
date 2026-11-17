@@ -1,0 +1,24 @@
+{
+  "tos1Wif": {
+    "op": "bulk",
+    "match": {
+      "conditions": [
+        {
+          "on": "name",
+          "is": "startsWith",
+          "value": "Ammo_RocketArt_thermobaric_220mm_x24"
+        }
+      ]
+    },
+    "expect": {
+      "minBlocks": 0
+    },
+    "edits": [
+      {
+        "field": "MaximumRangeGRU",
+        "set": "${round(12000 * multipliers.range)}",
+        "trailingComment": "${modTag} - TOS-1 (WiF) range set to ${round(12000 * multipliers.range)} GRU"
+      }
+    ]
+  }
+}

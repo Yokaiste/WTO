@@ -1,0 +1,47 @@
+version: 2
+release:
+  version: "2.0.3"
+  url: https://github.com/Yokaiste/WTO/releases/latest/download/WTO-config.zip
+  include: [LICENSE, NOTICE]
+dependencies:
+  # shortcut: YSM stable uses format 1; switch to latest/download after its YMB 2 stable release.
+  - url: https://github.com/Yokaiste/YSM/releases/download/preview/YSM-config.zip
+    required: false
+    reason: Add YSM's sandbox features alongside WTO.
+requires: ">=2, <3"
+id: "wto"
+name: "WARNO Tactical Overhaul"
+description: "Rework engagement ranges, movement, vision, and weapon timing across WARNO."
+enabled: true
+priority: 20
+allowWriteToModifiedFiles: true
+variables:
+  modTag: "WTO"
+  compatibility:
+    allowMissingVanillaTargets: false
+  # Category scales compose with each feature's multipliers.
+  multipliers:
+    range: 1.0
+    speed: 1.0
+    vision: 1.0
+    supply: 1.0
+    timing: 1.0
+    dispersion: 1.0
+    suppression: 1.0
+    ammunition: 1.0
+  tuning:
+    vehicleSmokeSalvosMultiplier: 1.0
+    missileFlightMultiplier: 1.0
+    ammunitionRangeMultiplier: 1.0
+    missileRangeMultiplier: 1.0
+    projectileSpeedMultiplier: 1.0
+    howitzerSpreadMultiplier: 1.0
+    suppressionMultiplier: 1.0
+    aaLockTimeMultiplier: 1.0
+    aaCycleTimeMultiplier: 1.0
+    gau8BurstMultiplier: 1.0
+    bmp2:
+      salvoMultiplier: 1.0
+      accuracyMultiplier: 1.0
+      # Shot/display counts must agree in both ammunition profiles and compatibility.
+      salvoSize: ${round(8 * multipliers.ammunition * tuning.bmp2.salvoMultiplier)}

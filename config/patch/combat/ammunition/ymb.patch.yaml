@@ -1,0 +1,12 @@
+version: 2
+id: wto.ammunition
+name: Ammunition rebalance
+description: 'Rework weapon ranges, projectile speeds, and artillery spread.'
+scope: prod
+# compatibility: the native TOS-1 rule excludes the WiF variant handled by compatibility/ammunition.
+generators:
+  - id: ammunition
+    root: mod
+    project: generator/Cargo.toml
+    binary: wto
+    entry: ammunition

@@ -1,0 +1,36 @@
+version: 2
+id: wto.compatibility.weapons
+name: Vehicle smoke with active protection
+scope: prod
+dependsOn: [wto.weapons]
+# Intentional no-op: vanilla has no active-protection ammunition.
+targets:
+  - file: GameData/Generated/Gameplay/Gfx/WeaponDescriptor.ndf
+    operations:
+      - op: bulk
+        allowNoChange: "compatibility: active-protection launchers are absent in vanilla."
+        match:
+          conditions:
+            - on: text
+              is: contains
+              value: Ammo_SMOKE_Vehicle_Grenadex8
+            - on: text
+              is: contains
+              value: Ammo_APS
+        expect:
+          minBlocks: 0
+        leadingComment:
+          '${modTag} - vehicle smoke set to ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)},
+          trophy system to ${round(multipliers.ammunition * tuning.trophySystemSalvosMultiplier)}'
+        edits:
+          - list: Salves
+            setEntry:
+              index: -2
+              value: ${round(3 * multipliers.ammunition * tuning.vehicleSmokeSalvosMultiplier)}
+          - list: Salves
+            setEntry:
+              index: -1
+              value: ${round(multipliers.ammunition * tuning.trophySystemSalvosMultiplier)}
+variables:
+  tuning:
+    trophySystemSalvosMultiplier: 1.0
