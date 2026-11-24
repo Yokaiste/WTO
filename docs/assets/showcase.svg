@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">WTO: rethink the approach</title>
+  <desc id="desc">WARNO Tactical Overhaul. A tactical map shows an armored unit flanking an enemy position and its engagement range. WTO changes weapon ranges, movement, and firing cycles.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#202b26"/>
+      <stop offset="1" stop-color="#0b1416"/>
+    </linearGradient>
+    <radialGradient id="light">
+      <stop stop-color="#71855c" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#71855c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sector" x1=".8" x2=".2" y2="1">
+      <stop stop-color="#df8c58" stop-opacity=".17"/>
+      <stop offset="1" stop-color="#df8c58" stop-opacity=".01"/>
+    </linearGradient>
+    <linearGradient id="armor" x2="1" y2="1">
+      <stop stop-color="#72856a"/>
+      <stop offset="1" stop-color="#293c35"/>
+    </linearGradient>
+    <linearGradient id="edge">
+      <stop stop-color="#d8dfab" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#d8dfab"/>
+      <stop offset="1" stop-color="#d8dfab" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#b3c5a3" stroke-opacity=".09"/>
+    </pattern>
+    <clipPath id="canvas"><rect width="1280" height="720" rx="24"/></clipPath>
+    <clipPath id="map"><path d="M648 36H1248V532H648Z"/></clipPath>
+    <marker id="arrow" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="m1 1 10 5-10 5 3-5Z" fill="#e0e8b3"/>
+    </marker>
+  </defs>
+  <g clip-path="url(#canvas)">
+    <rect width="1280" height="720" fill="url(#background)"/>
+    <ellipse cx="1005" cy="290" rx="480" ry="340" fill="url(#light)"/>
+    <path d="M64 31H124M64 31V37M1216 31H1156M1216 31V37" fill="none" stroke="#728170"/>
+    <g id="intro" transform="translate(0 25)">
+      <rect x="64" y="66" width="5" height="18" rx="2" fill="#eab17c"/>
+      <g font-family="Arial, Helvetica, sans-serif">
+        <text x="84" y="81" fill="#c6cfb7" font-size="18" font-weight="700" letter-spacing="2.4">WARNO TACTICAL OVERHAUL</text>
+        <text x="56" y="238" fill="#f2f2e6" font-size="154" font-weight="700" letter-spacing="-8">WTO</text>
+        <text x="64" y="321" fill="#f2f2e6" font-size="50" font-weight="700" letter-spacing="-1.5">Rethink</text>
+        <text x="64" y="380" fill="#dce5b0" font-size="50" font-weight="700" letter-spacing="-1.5">the approach.</text>
+        <text x="66" y="435" fill="#bbc7b4" font-size="22">Familiar units. A different fight.</text>
+      </g>
+    </g>
+
+    <g id="artwork" transform="translate(0 -6)">
+      <g clip-path="url(#map)">
+        <path d="M648 36H1248V532H648Z" fill="url(#grid)"/>
+        <g fill="none" stroke="#9eae85" stroke-opacity=".13" stroke-width="1.5">
+          <path d="M643 128c100-74 144 41 210-11s51-95 139-69 98 35 169-23"/>
+          <path d="M638 146c112-77 154 51 223-10s59-91 131-66 112 29 176-28"/>
+          <path d="M637 168c123-81 164 56 236-13s62-86 122-65 124 27 184-31"/>
+          <path d="M638 194c131-87 175 49 248-23s74-83 124-63 112 26 179-31"/>
+          <path d="M700 532c-24-80 32-112 93-87s64 28 94-2 27-88 98-64 77 9 137-32 104-20 161 12"/>
+          <path d="M724 538c-28-82 27-94 68-74s71 24 103-8 37-74 90-53 85 11 143-29 110-18 157 12"/>
+          <path d="M750 542c-27-78 21-74 48-59s66 22 108-14 34-55 85-42 80 14 144-27 104-14 153 9"/>
+          <path d="M777 545c-22-57 17-45 40-37s56 9 101-24 28-34 81-33 82 14 140-24 110-9 151 8"/>
+        </g>
+        <path d="M720 79c25 86 98 92 86 165s-17 118 78 137 99 61 98 148" fill="none" stroke="#a6b39f" stroke-opacity=".16" stroke-width="16"/>
+        <path d="M720 79c25 86 98 92 86 165s-17 118 78 137 99 61 98 148" fill="none" stroke="#c2cdb4" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="7 8"/>
+        <g fill="#6b7f59" fill-opacity=".11" stroke="#7f946c" stroke-opacity=".16">
+          <path d="m901 69 68 18-24 71-66-10Z"/>
+          <path d="m1141 270 89-15 27 63-96 27Z"/>
+          <path d="m654 295 68-29 47 64-64 50Z"/>
+          <path d="m1008 450 78-21 57 73-111 24Z"/>
+        </g>
+        <path d="M1064 216 890 119A200 200 0 0 0 935 369Z" fill="url(#sector)"/>
+        <g fill="none">
+          <circle cx="1064" cy="216" r="199" stroke="#ce9b70" stroke-opacity=".34"/>
+          <circle cx="1064" cy="216" r="128" stroke="#d5b08a" stroke-opacity=".4" stroke-dasharray="4 8"/>
+          <circle cx="1064" cy="216" r="58" stroke="#d7b58f" stroke-opacity=".5"/>
+          <path d="M1064 4v22m0 380v22M852 216h22m380 0h22" stroke="#d8ad7e" stroke-width="2"/>
+          <path d="M1064 216 890 119m174 97L935 369" stroke="#e2a674" stroke-opacity=".28"/>
+        </g>
+        <path d="M704 450c69 53 141 52 226 23s179 19 237-56l20-52" fill="none" stroke="#dce7ac" stroke-opacity=".08" stroke-width="18"/>
+        <path d="M704 450c69 53 141 52 226 23s179 19 237-56l20-52" fill="none" stroke="#dce7ac" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow)"/>
+        <path d="m855 356 91-76" fill="none" stroke="#dce7ac" stroke-width="2" stroke-dasharray="4 7" opacity=".5"/>
+      </g>
+      <g transform="translate(849 358) rotate(36)" stroke-linejoin="round">
+        <ellipse cy="12" rx="58" ry="84" fill="#071112" opacity=".65"/>
+        <g fill="#182a26" stroke="#81927a" stroke-width="1.5">
+          <rect x="-45" y="-51" width="20" height="106" rx="7"/>
+          <rect x="25" y="-51" width="20" height="106" rx="7"/>
+        </g>
+        <path d="M-43-37h16m-16 15h16m-16 15h16m-16 15h16m-16 15h16m-16 15h16M27-37h16M27-22h16M27-7h16M27 8h16M27 23h16M27 38h16" fill="none" stroke="#81927a" stroke-opacity=".65" stroke-width="2"/>
+        <path d="M-22-62H22L34-39V36L20 62H-20L-34 36V-39Z" fill="url(#armor)" stroke="#b8c9a2" stroke-width="2"/>
+        <path d="M-24 33H24M-19 39H19M-19 46H19M-19 53H19" fill="none" stroke="#a2b494" stroke-opacity=".55" stroke-width="2"/>
+        <path d="m-24-18 18-13 28 12 6 27-16 19-33-9Z" fill="#51674e" stroke="#cfdbaf" stroke-width="2"/>
+        <path d="M-4-12V-83H4V-12" fill="#718568" stroke="#d0dcb5" stroke-width="1.5"/>
+        <circle cx="8" cy="3" r="9" fill="#314b3d" stroke="#a5ba92"/>
+        <path d="M-15-12V5m-4-8h8" fill="none" stroke="#e1e8be" stroke-width="2"/>
+      </g>
+
+      <g fill="none" stroke="#ecad7d" stroke-width="2">
+        <path d="m1064 187 37 29-37 29-37-29Z" fill="#352d24"/>
+        <ellipse cx="1064" cy="216" rx="14" ry="7"/>
+        <path d="M1057 177v-9m14 9v-9"/>
+        <path d="m1157 111 23 18-23 18-23-18Z" fill="#352d24"/>
+        <path d="m1147 121 20 16m0-16-20 16"/>
+      </g>
+      <g font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="2">
+        <path d="M873 202H791" stroke="#ad9476"/>
+        <text x="707" y="208" fill="#d8b58e">REACH</text>
+        <path d="M1035 472v30" stroke="#a6b58c"/>
+        <text x="992" y="525" fill="#cdd8a8">FLANK</text>
+      </g>
+    </g>
+
+    <rect y="555" width="1280" height="165" fill="#111e1c"/>
+    <path d="M0 555H1280" stroke="#3c4d3f"/>
+    <path d="M64 555H1216" stroke="url(#edge)" stroke-width="2"/>
+    <path d="M448 602V673M832 602V673" stroke="#394b3f"/>
+    <g id="features" font-family="Arial, Helvetica, sans-serif">
+      <g>
+        <g transform="translate(135.5 624)" fill="none" stroke="#d9e2b1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle r="13"/>
+          <circle r="5"/>
+          <path d="M0-19v6m0 26v6M-19 0h6m26 0h6"/>
+        </g>
+        <text x="165.5" y="629.5" fill="#eef0e3" font-size="22" font-weight="700">Engage at new ranges</text>
+        <text x="256" y="667" text-anchor="middle" fill="#b5c3ae" font-size="19">Reworked engagement ranges.</text>
+      </g>
+      <g>
+        <g transform="translate(531.5 624)" fill="none" stroke="#d9e2b1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-14 9V1C-14-10 9 0 9-15m-6 6 6-6 6 6"/>
+          <circle cx="-14" cy="14" r="2" fill="#d9e2b1" stroke="none"/>
+        </g>
+        <text x="557.5" y="629.5" fill="#eef0e3" font-size="22" font-weight="700">Rethink your routes</text>
+        <text x="640" y="667" text-anchor="middle" fill="#b5c3ae" font-size="19">Roads, speed, and endurance.</text>
+      </g>
+      <g>
+        <g transform="translate(934.5 624)" fill="none" stroke="#d9e2b1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-11-14h22m-22 28h22M-9-14v5L9 9v5m0-28v5L-9 9v5"/>
+        </g>
+        <text x="958.5" y="629.5" fill="#eef0e3" font-size="22" font-weight="700">Time every shot</text>
+        <text x="1024" y="667" text-anchor="middle" fill="#b5c3ae" font-size="19">Flight times and firing cycles.</text>
+      </g>
+    </g>
+  </g>
+</svg>

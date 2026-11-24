@@ -1,0 +1,11 @@
+version: 2
+id: wto.ammunition_missiles
+name: Missile ammunition rebalance
+description: 'Extend missile engagement ranges and slow anti-aircraft firing cycles.'
+scope: prod
+generators:
+  - id: ammunition
+    root: mod
+    project: generator/Cargo.toml
+    binary: wto
+    entry: ammunition_missiles

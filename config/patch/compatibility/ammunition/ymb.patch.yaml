@@ -1,0 +1,17 @@
+version: 2
+id: wto.compatibility.ammunition
+name: Custom ammunition rebalance
+description: 'Apply WTO weapon rules to renamed and inline ammunition from other mods.'
+scope: prod
+dependsOn:
+  - wto.ammunition
+  - wto.ammunition_missiles
+  - wto.missiles
+generators:
+  - id: ammunition
+    root: mod
+    project: generator/Cargo.toml
+    binary: wto
+    entry: compatibility
+    tests:
+      - {id: compatibility, when: before}

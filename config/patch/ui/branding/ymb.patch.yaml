@@ -1,0 +1,18 @@
+version: 2
+id: wto.ysm_branding
+name: WTO with YSM Branding
+description: 'Label the YSM main menu as WTO when playing the combined build.'
+scope: prod
+generators:
+  - id: branding
+    root: mod
+    project: generator/Cargo.toml
+    binary: wto
+    entry: branding
+    tests:
+      - {id: branding, when: before}
+variables:
+  branding:
+    YSM: ${config.mod.name}
+    YSMTIT: ${config.mod.name}
+    YSMMT: YSM sandbox battles with WTO tactical balance
