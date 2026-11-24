@@ -1,0 +1,19 @@
+version: 2
+# Retain the installed ownership id when moving this WTO safety rule out of compatibility.
+id: wto.compatibility.aircraft
+name: Aircraft dive range safety
+
+description: Keep WTO range increases within direct-fire aircraft dive limits.
+scope: prod
+
+dependsOn:
+  - wto.ammunition
+  - wto.ammunition_missiles
+  - wto.compatibility.ammunition
+
+generators:
+  - id: aircraft
+    root: mod
+    project: generator/Cargo.toml
+    binary: wto
+    entry: aircraft
